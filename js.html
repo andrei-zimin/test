@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Website Automatically</title>
+</head>
+<body>
+
+<script>
+  function openDevTools() {
+    // Проверяем, поддерживает ли браузер открытие консоли разработчика
+    if (window.devToolsExtension) {
+        // Используем расширение, если оно установлено
+        window.devToolsExtension.open();
+    } else {
+        // Если расширения нет, пытаемся открыть консоль напрямую
+        console.log('Попытка открыть консоль разработчика...');
+        var tools = window.openDevTools || window.webkitOpenDevTools || window.chromeOpenDevTools;
+        if (tools) {
+            tools.apply(window);
+        } else {
+            console.error('Не удалось найти функцию для открытия консоли разработчика.');
+        }
+    }
+}
+
+
+fetch('https://api.ipify.org?format=json')
+  .then(res => res.json())
+  .then(data => console.log(data.ip));
+
+// Функция для получения информации об операционной системе
+function getOS() {
+  var userAgent = window.navigator.userAgent;
+  var platform = window.navigator.platform;
+  // Проверяем, является ли пользовательский агент Internet Explorer
+  if (/MSIE|Trident/.test(userAgent)) {
+    return 'Internet Explorer';
+  } else if (/Edge/.test(userAgent)) {
+    return 'Microsoft Edge';
+  } else if (/Firefox/.test(userAgent)) {
+    return 'Mozilla Firefox';
+  } else if (/Safari/.test(userAgent) && /Chrome/.test(userAgent)) {
+    return 'Google Chrome';
+  } else if (/Safari/.test(userAgent)) {
+    return 'Apple Safari';
+  } else if (/Opera/.test(userAgent)) {
+    return 'Opera';
+  } else if (/Android/.test(userAgent)) {
+    return 'Android';
+  } else if (/Linux/.test(platform)) {
+    return 'Linux';
+  } else if (/Mac/.test(platform)) {
+    return 'Mac OS X';
+  } else if (/Windows/.test(platform)) {
+    return 'Windows';
+  } else {
+    return 'Unknown';
+  }
+}
+
+// Функция для получения информации о браузере
+function getBrowser() {
+  var userAgent = window.navigator.userAgent;
+  var browser = '';
+
+  // Проверяем, является ли пользовательский агент Internet Explorer
+  if (/MSIE|Trident/.test(userAgent)) {
+    browser = 'Internet Explorer';
+  } else if (/Edge/.test(userAgent)) {
+    browser = 'Microsoft Edge';
+  } else if (/Firefox/.test(userAgent)) {
+    browser = 'Mozilla Firefox';
+  } else if (/Safari/.test(userAgent) && /Chrome/.test(userAgent)) {
+    browser = 'Google Chrome';
+  } else if (/Safari/.test(userAgent)) {
+    browser = 'Apple Safari';
+  } else if (/Opera/.test(userAgent)) {
+    browser = 'Opera';
+  } else {
+    browser = 'Unknown';
+  }
+
+  return browser;
+}
+
+// Функция для получения информации о разрешении экрана
+function getScreenResolution() {
+  return window.screen.width + 'x' + window.screen.height;
+}
+
+// Функция для получения информации о языке системы
+function getLanguage() {
+  return navigator.language || navigator.userLanguage;
+}
+
+// Выводим собранную информацию
+console.log('Операционная система:', getOS());
+console.log('Браузер:', getBrowser());
+console.log('Разрешение экрана:', getScreenResolution());
+console.log('Язык системы:', getLanguage());
+// if ("geolocation" in navigator) {
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     var latitude = position.coords.latitude;
+//     var longitude = position.coords.longitude;
+//     var altitude = position.coords.altitude;
+//     var accuracy = position.coords.accuracy;
+//     var altitudeAccuracy = position.coords.altitudeAccuracy;
+//     var heading = position.coords.heading;
+//     var speed = position.coords.speed;
+
+//     // Теперь вы можете использовать эти данные, например, для отображения текущего местоположения пользователя
+//     console.log("Latitude: " + latitude + " Longitude: " + longitude);
+//   });
+// } else {
+//   console.log("Geolocation is not supported by this browser.");
+// }
+
+
+
+// window.onload = function() {
+//   openWebsite();
+// };
+
+// function openWebsite() {
+//   var url = "https://vk.com"; // Замените на нужную ссылку
+//   window.open(url, "_blank");
+
+//   // Получаем куки текущей страницы и выводим их в alert
+//   var cookies = document.cookie;
+//   alert("Cookies: " + cookies);
+// }
+</script>
+<button onclick="openDevTools()">Открыть консоль разработчика</button>
+
+</body>
+</html>
